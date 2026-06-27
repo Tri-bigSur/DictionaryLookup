@@ -6,12 +6,15 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct DictionaryLookupApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            AppMainView()
         }
+        .modelContainer(for: [WordFolder.self,FavoriteWord.self])
+        
     }
 }

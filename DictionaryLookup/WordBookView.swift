@@ -46,6 +46,7 @@ struct WordBookView: View {
                                     if isSelectionMode && !selectedWordIDs.isEmpty{
                                         Button{
                                             moveSelectedWords(to: folder)
+                                            HapticManager.shared.playSuccess()
                                         }label:{
                                             FolderRowContent(folder: folder, isMoveTarget: true)
                                         }
@@ -136,7 +137,10 @@ struct WordBookView: View {
                     .alert("New Folder",isPresented: $isShowingNewFolderAlert){
                         TextField("Folder Name",text: $newFolderName)
                         Button("Cancel",role: .cancel){newFolderName = ""}
-                        Button("Create"){createNewFolder()}
+                        Button("Create"){
+                            createNewFolder()
+                            HapticManager.shared.playSuccess()
+                        }
                             .disabled(newFolderName.trimmingCharacters(in: .whitespaces).isEmpty)
                         
                     }message: {
@@ -201,6 +205,9 @@ struct WordBookView: View {
     private func deleteWord(at offsets: IndexSet){
         for index in offsets{context.delete(uncategorizedWords[index])}
     }
+    
+    // MARK: - Hiệu Ứng Rung Thành Công (Haptic Feedback Engine)
+    
     
     
 

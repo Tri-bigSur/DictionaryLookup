@@ -52,6 +52,10 @@ struct ContentView: View {
                                         
                                         Button{
                                             toggleFavorite()
+                                            if !isSaved {
+                                                HapticManager.shared.playSuccess()
+                                            }
+                                            
                                         }label: {
                                             Image(systemName: isSaved ? "star.fill" : "star")
                                                 .foregroundColor(isSaved ? .yellow : .gray)
@@ -109,9 +113,7 @@ struct ContentView: View {
             }
             
         }
-        .onChange(of: isSaved){
-            print(isSaved)
-        }
+        
         // Task
         
     }
